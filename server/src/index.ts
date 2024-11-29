@@ -1,8 +1,9 @@
-import express from "express";
+//import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import app from "./app";
 dotenv.config();
-const app = express();
+
 const port = process.env.PORT || 3000;
 
 if (!process.env.MONGO_DB_URI) {
