@@ -1,20 +1,22 @@
-import Note from "../model/note";
+import { RequestHandler } from "express";
+import Notes from "../model/note";
 
-export const getNote = async (
-  req: { body: { user: string; email: string } },
-  res: {
-    status: (arg0: number) => {
-      (): any;
-      new (): any;
-      json: { (arg0: { success: boolean; message: string }): any; new (): any };
-    };
+export const getNotes: RequestHandler = async (req, res, next) => {
+  try {
+    //throw Error("Bazinga");
+    const notes = await Notes.find().exec();
+    res.status(200).json({ notes });
+  } catch (error) {
+    next(error);
   }
-) => {
-  const { user, email } = req.body;
-  const note = Note.create({ title: user, note: email });
-  console.log(note);
+};
 
-  return res
-    .status(200)
-    .json({ success: true, message: "note fetched successfully" });
+export const createNotes: RequestHandler = async (req, res, next) => {
+  const { title, text } = req.body;
+  try {
+    const newNote = await Notes.create({ title, text });
+    res.status(201).json(newNote);
+  } catch (error) {
+    next(error);
+  }
 };

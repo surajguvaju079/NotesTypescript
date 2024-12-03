@@ -1,15 +1,25 @@
 import mongoose from "mongoose";
 import { Schema } from "mongoose";
 
-const noteModel = new Schema({
-  title: {
-    type: String,
-    required: true,
-  },
-  text: {
-    type: String,
-  },
-});
-const Note = mongoose.model("Note", noteModel);
+interface Note {
+  title: string;
+  text: string;
+}
 
-export default Note;
+const noteModel = new Schema<Note>(
+  {
+    title: {
+      type: String,
+      required: true,
+    },
+    text: {
+      type: String,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
+
+const Notes = mongoose.model<Note>("Note", noteModel);
+export default Notes;
