@@ -7,6 +7,7 @@ import {
   CardTitle,
 } from "react-bootstrap";
 import { Note as NoteModel } from "../model/note";
+import { formatDate } from "../utils/formatDate";
 
 interface NoteProps {
   notes: NoteModel;
@@ -20,8 +21,8 @@ const Note = ({ notes }: NoteProps) => {
       </CardHeader>
       <CardBody className="bg-slate-500 text-white">{notes?.text}</CardBody>
       <CardFooter className="bg-blue-700 text-white flex justify-between">
-        <div>Created At:{notes?.createdAt}</div>
-        <div>Updated At:{notes?.updatedAt}</div>
+        <div>Created At:{formatDate(notes?.createdAt)}</div>
+        <div>Updated At:{formatDate(notes?.updatedAt)}</div>
       </CardFooter>
     </Card>
   );
