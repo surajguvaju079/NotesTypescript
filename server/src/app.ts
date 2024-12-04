@@ -3,9 +3,10 @@ import morgan from "morgan";
 import { isHttpError } from "http-errors";
 //import Notes from "./model/note";
 import notesRoute from "./routes/notes";
+import cors from "cors";
 import createHttpError from "http-errors";
 const app = express();
-
+app.use(cors({}));
 app.use(morgan("dev"));
 app.use(express.json());
 app.use("/api/notes", notesRoute);
